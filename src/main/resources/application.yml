@@ -1,0 +1,18 @@
+server:
+  port: 9900
+  shutdown: graceful
+
+spring:
+  application:
+    name: discovery
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
+eureka:
+  client:
+    # Eureka Server 자체를 Eureka Client 로 등록? -> False
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      # Eureka 의 경우 health Check시 항상 자기자신을 호출하는데 이때에 defualt Port가 8761로 지정됨, 따라서 항상 설정이 살아잇는지를 보기위해서는 해당 Default Port 를 변경해야함
+      defaultZone: http://localhost:${server.port}/eureka
